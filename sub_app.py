@@ -4,12 +4,12 @@ import sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
-INSTANCE_DIR = BASE_DIR / "instance"
+DEMO_DIR = BASE_DIR / "demo"
 
 
 def load_module(file_name: str):
-    path = INSTANCE_DIR / file_name
-    mod_name = f"instance_{path.stem}"
+    path = DEMO_DIR / file_name
+    mod_name = f"demo_{path.stem}"
 
     # 🔥 热重载
     sys.modules.pop(mod_name, None)
@@ -27,7 +27,7 @@ with gr.Blocks() as sub_app:
         file_name = request.query_params.get("file")
 
         if not file_name:
-            gr.Markdown("### 💤 未选择文件")
+            gr.Markdown("# 请点击左侧渲染按钮")
             return
 
         mod = load_module(file_name)
